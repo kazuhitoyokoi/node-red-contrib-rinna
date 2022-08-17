@@ -1,1 +1,1 @@
-# Node template for Node-RED
+# node-red-contrib-rinna
