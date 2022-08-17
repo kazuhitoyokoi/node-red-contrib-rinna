@@ -1,0 +1,62 @@
+[
+    {
+        "id": "dddca0cff5202fb1",
+        "type": "inject",
+        "z": "386bd78a760dad56",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "こんにちは",
+        "payloadType": "str",
+        "x": 280,
+        "y": 200,
+        "wires": [
+            [
+                "b2334adaf0d9d627"
+            ]
+        ]
+    },
+    {
+        "id": "ee7daf353176438a",
+        "type": "debug",
+        "z": "386bd78a760dad56",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b2334adaf0d9d627",
+        "type": "rinna",
+        "z": "386bd78a760dad56",
+        "name": "",
+        "api": "ecce",
+        "subscription": "",
+        "x": 430,
+        "y": 200,
+        "wires": [
+            [
+                "ee7daf353176438a"
+            ]
+        ]
+    }
+]
