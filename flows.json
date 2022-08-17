@@ -1,0 +1,389 @@
+[
+    {
+        "id": "a01253e063fc4b82",
+        "type": "subflow",
+        "name": "rinna",
+        "info": "",
+        "category": "analysis",
+        "in": [
+            {
+                "x": 140,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "30278f05e8ba7d71"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1040,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "48ecfef21c1a9d3e",
+                        "port": 0
+                    },
+                    {
+                        "id": "83476487031debb2",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "api",
+                "type": "str",
+                "value": "ecce",
+                "ui": {
+                    "icon": "font-awesome/fa-server",
+                    "label": {
+                        "en-US": "API"
+                    },
+                    "type": "select",
+                    "opts": {
+                        "opts": [
+                            {
+                                "l": {
+                                    "en-US": "文章特徴付けAPI"
+                                },
+                                "v": "ecce"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "Text to Image API"
+                                },
+                                "v": "ldm"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "subscription",
+                "type": "cred",
+                "ui": {
+                    "icon": "font-awesome/fa-key",
+                    "label": {
+                        "en-US": "subscription"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "cred"
+                        ]
+                    }
+                }
+            }
+        ],
+        "meta": {
+            "module": "node-red-contrib-rinna",
+            "type": "rinna",
+            "version": "0.0.1",
+            "author": "Kazuhito Yokoi <kazuhitoyokoi@nodered.jp>",
+            "desc": "Node-RED node to access rinna API",
+            "keywords": "node-red,rinna",
+            "license": "Apache-2.0"
+        },
+        "color": "#FFAAAA",
+        "icon": "font-awesome/fa-comments",
+        "status": {
+            "x": 1060,
+            "y": 360,
+            "wires": [
+                {
+                    "id": "16064b2cb615dab3",
+                    "port": 0
+                },
+                {
+                    "id": "9296a67ca40b60df",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "b99f0a599cb3e7e7",
+        "type": "http request",
+        "z": "a01253e063fc4b82",
+        "name": "文章特徴付けAPI",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.rinna.co.jp/models/ecce",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Ocp-Apim-Subscription-Key",
+                "valueType": "other",
+                "valueValue": "${subscription}"
+            },
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 690,
+        "y": 100,
+        "wires": [
+            [
+                "83476487031debb2"
+            ]
+        ]
+    },
+    {
+        "id": "3c28d2f4f451f7bc",
+        "type": "template",
+        "z": "a01253e063fc4b82",
+        "name": "POSTデータ生成",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"knowledgePath\": \"ECCE_Sample.txt\",\n    \"query\": \"{{payload}}\"\n}",
+        "output": "str",
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "b99f0a599cb3e7e7"
+            ]
+        ]
+    },
+    {
+        "id": "83476487031debb2",
+        "type": "change",
+        "z": "a01253e063fc4b82",
+        "name": "結果を取り出し",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.resultResponseText",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ddded437c8056bd",
+        "type": "http request",
+        "z": "a01253e063fc4b82",
+        "name": "Text to Image API",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.rinna.co.jp/models/ldm/predict/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Ocp-Apim-Subscription-Key",
+                "valueType": "other",
+                "valueValue": "${subscription}"
+            },
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "48ecfef21c1a9d3e"
+            ]
+        ]
+    },
+    {
+        "id": "01b715828286c3ad",
+        "type": "template",
+        "z": "a01253e063fc4b82",
+        "name": "POSTデータ生成",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"data\": [\n        \"{{payload}}\",\n        1,\n        4,\n        15,\n        50,\n        256,\n        256,\n        null,\n        \"20%\",\n        false,\n        0\n    ]\n}",
+        "output": "str",
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "1ddded437c8056bd"
+            ]
+        ]
+    },
+    {
+        "id": "48ecfef21c1a9d3e",
+        "type": "change",
+        "z": "a01253e063fc4b82",
+        "name": "結果を取り出し",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.data[0][0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e472f44bd3fcb0ca",
+        "type": "status",
+        "z": "a01253e063fc4b82",
+        "name": "",
+        "scope": null,
+        "x": 620,
+        "y": 280,
+        "wires": [
+            [
+                "16064b2cb615dab3"
+            ]
+        ]
+    },
+    {
+        "id": "16064b2cb615dab3",
+        "type": "template",
+        "z": "a01253e063fc4b82",
+        "name": "ステータスにrequestingを表示",
+        "field": "status.text",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "requesting",
+        "output": "str",
+        "x": 850,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0bc809b20860f47e",
+        "type": "complete",
+        "z": "a01253e063fc4b82",
+        "name": "",
+        "scope": [
+            "17e8f84da1223cc9",
+            "83476487031debb2",
+            "48ecfef21c1a9d3e"
+        ],
+        "uncaught": false,
+        "x": 630,
+        "y": 360,
+        "wires": [
+            [
+                "9296a67ca40b60df"
+            ]
+        ]
+    },
+    {
+        "id": "9296a67ca40b60df",
+        "type": "template",
+        "z": "a01253e063fc4b82",
+        "name": "ステータス表示をクリア",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "",
+        "output": "str",
+        "x": 870,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "30278f05e8ba7d71",
+        "type": "switch",
+        "z": "a01253e063fc4b82",
+        "name": "API切り替え",
+        "property": "api",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ecce",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ldm",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "3c28d2f4f451f7bc"
+            ],
+            [
+                "01b715828286c3ad"
+            ]
+        ]
+    },
+    {
+        "id": "17f8954d8056b701",
+        "type": "subflow:a01253e063fc4b82",
+        "z": "c9c7c8d632910c05",
+        "name": "",
+        "env": [
+            {
+                "name": "subscription",
+                "type": "cred"
+            }
+        ],
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "390739608ccd4dbd",
+                "29338c9d4eb340ab"
+            ]
+        ]
+    }
+]
