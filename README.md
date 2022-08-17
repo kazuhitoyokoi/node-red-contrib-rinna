@@ -1,5 +1,5 @@
 # node-red-contrib-rinna
-Node-RED node to access rinna API
+Node-RED node to access rinna API (https://developers.rinna.co.jp/products)
 
 ## Examples
 The flow files of the following demonstrations are available in the `examples` directory.
