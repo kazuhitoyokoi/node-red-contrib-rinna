@@ -1,0 +1,122 @@
+[
+    {
+        "id": "435c35f9304cb966",
+        "type": "rinna",
+        "z": "eb179077e67fa137",
+        "name": "",
+        "api": "ldm",
+        "subscription": "",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "f8856b9ebd353bed"
+            ]
+        ]
+    },
+    {
+        "id": "01899f59ff3c54b4",
+        "type": "inject",
+        "z": "eb179077e67fa137",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "都会",
+        "payloadType": "str",
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "435c35f9304cb966"
+            ]
+        ]
+    },
+    {
+        "id": "f8856b9ebd353bed",
+        "type": "image",
+        "z": "eb179077e67fa137",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 640,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "679b23ea477d9d4c",
+        "type": "rinna",
+        "z": "eb179077e67fa137",
+        "name": "",
+        "api": "ldm",
+        "subscription": "",
+        "x": 470,
+        "y": 340,
+        "wires": [
+            [
+                "286ed77437845460"
+            ]
+        ]
+    },
+    {
+        "id": "286ed77437845460",
+        "type": "image",
+        "z": "eb179077e67fa137",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 640,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "1c8055cc5ed0c1c7",
+        "type": "inject",
+        "z": "eb179077e67fa137",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "田舎",
+        "payloadType": "str",
+        "x": 330,
+        "y": 340,
+        "wires": [
+            [
+                "679b23ea477d9d4c"
+            ]
+        ]
+    }
+]
