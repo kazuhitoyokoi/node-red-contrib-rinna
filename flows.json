@@ -81,7 +81,7 @@
         "meta": {
             "module": "node-red-contrib-rinna",
             "type": "rinna",
-            "version": "0.0.2",
+            "version": "0.0.3",
             "author": "Kazuhito Yokoi <kazuhitoyokoi@nodered.jp>",
             "desc": "Node-RED node to access rinna API",
             "keywords": "node-red,rinna",
