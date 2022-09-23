@@ -193,7 +193,7 @@
         "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "https://api.rinna.co.jp/models/ldm/predict/",
+        "url": "https://api.rinna.co.jp/models/tti/v2",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -231,7 +231,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "{\n    \"data\": [\n        \"{{payload}}\",\n        1,\n        4,\n        15,\n        50,\n        256,\n        256,\n        null,\n        \"20%\",\n        false,\n        0\n    ]\n}",
+        "template": "{\n    \"prompts\": \"{{payload}}\",\n    \"scale\": 7.5\n}",
         "output": "str",
         "x": 470,
         "y": 180,
@@ -251,7 +251,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.data[0][0]",
+                "to": "payload.image",
                 "tot": "msg"
             }
         ],
@@ -367,23 +367,14 @@
         ]
     },
     {
-        "id": "17f8954d8056b701",
+        "id": "007396a035421745",
         "type": "subflow:a01253e063fc4b82",
-        "z": "c9c7c8d632910c05",
+        "z": "11b326e052946d50",
         "name": "",
-        "env": [
-            {
-                "name": "subscription",
-                "type": "cred"
-            }
-        ],
-        "x": 490,
-        "y": 380,
+        "x": 350,
+        "y": 600,
         "wires": [
-            [
-                "390739608ccd4dbd",
-                "29338c9d4eb340ab"
-            ]
+            []
         ]
     }
 ]
